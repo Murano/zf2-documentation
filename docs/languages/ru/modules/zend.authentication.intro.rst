@@ -21,7 +21,7 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 .. note::
 
   Класса ``Zend\Authentication\Authentication`` не существует ,
-  аутентификацию обеспечивает Zend\Authentication\AuthenticationService. 
+  аутентификацию обеспечивает "Zend\Authentication\AuthenticationService". 
   Этот класс использует основные адаптеры аутентификации и постоянные хранилища.
 
 .. _zend.authentication.introduction.adapters:
