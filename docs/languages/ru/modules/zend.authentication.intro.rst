@@ -21,7 +21,7 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 .. note::
 
   Класса ``Zend\Authentication\Authentication`` не существует ,
-  аутентификацию обеспечивает "Zend\Authentication\AuthenticationService". 
+  аутентификацию обеспечивает ``Zend\Authentication\AuthenticationService``. 
   Этот класс использует основные адаптеры аутентификации и постоянные хранилища.
 
 .. _zend.authentication.introduction.adapters:
@@ -29,16 +29,16 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 Адаптеры
 --------
 
-Адаптер ``Zend_Auth`` используется дла аутентификации посредством
+Адаптер ``Zend\Authentication`` используется дла аутентификации посредством
 определенного сервиса, такого как *LDAP*, *СУРБД* или файлового
 хранилища. Адаптеры могут значительно различаться, но
 некоторые основные черты характерны для всех. Например, все
-адаптеры ``Zend_Auth`` принимают учетные данные, выполненяют запрос
+адаптеры ``Zend\Authentication`` принимают учетные данные, выполненяют запрос
 к аутентификационному сервису и возвращают результат.
 
-Каждый адаптер ``Zend_Auth`` реализует ``Zend_Auth_Adapter_Interface``. Этот
+Каждый адаптер ``Zend\Authentication`` реализует ``Zend\Authentication\Adapter\AdapterInterface``. Этот
 интерфейс определяет лишь один метод: ``authenticate()``, который
-должен быть реализовать для выполнения аутентификационного
+должен быть реализован   для выполнения аутентификационного
 запроса. Адаптер должен быть настроен до вызова ``authenticate()``,
 настройка включает в себя установку учетных данных(например,
 логин и пароль) и определение специфичных значений, таких как
@@ -51,8 +51,9 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 
 .. code-block:: php
    :linenos:
-
-   class MyAuthAdapter implements Zend_Auth_Adapter_Interface
+   use Zend\Authentication\Adapter\AdapterInterface;
+  
+   class My\Auth\Adapter implements AdapterInterface
    {
        /**
         * Устанавливает логин и пароль для аутентификации
@@ -65,10 +66,11 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
        }
 
        /**
-        * Выполняет попытку аутентификации
+        * Performs an authentication attempt
         *
-        * @throws Zend_Auth_Adapter_Exception Если аутентификация не может быть выполнена
-        * @return Zend_Auth_Result
+        * @return \Zend\Authentication\Result
+        * @throws \Zend\Authentication\Adapter\Exception\ExceptionInterface
+        *               If authentication cannot be performed
         */
        public function authenticate()
        {
@@ -77,9 +79,9 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
    }
 
 Как указано в докблоке, ``authenticate()`` должен вернуть экземпляр
-``Zend_Auth_Result`` (или унаследованный от него). Если по какой либо
+``Zend\Authentication\Result`` (или унаследованный от него). Если по какой либо
 причине выполнение аутентификации невозможно, ``authenticate()``
-должен бросить исключение, происходящее от ``Zend_Auth_Adapter_Exception``.
+должен бросить исключение, происходящее от ``Zend\Authentication\Adapter\Exception\ExceptionInterface``.
 
 .. _zend.authentication.introduction.results:
 
