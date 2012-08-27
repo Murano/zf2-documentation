@@ -145,15 +145,15 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 
    switch ($result->getCode()) {
 
-       case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
+       case Result::FAILURE_IDENTITY_NOT_FOUND:
            /** Выполнить действия при несуществующем идентификаторе **/
            break;
 
-       case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
+       case Result::FAILURE_CREDENTIAL_INVALID:
            /** Выполнить действия при некорректных учетных данных **/
            break;
 
-       case Zend_Auth_Result::SUCCESS:
+       case Result::SUCCESS:
            /** Выполнить действия при успешной аутентификации **/
            break;
 
@@ -181,22 +181,24 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 Сохранение идентификатора в сессии PHP, по умолчанию
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-По умолчанию, ``Zend_Auth`` обеспечивает постоянное хранение
+По умолчанию, ``Zend\Authentication`` обеспечивает постоянное хранение
 идентификатора полученного в результате успешной попытки
 аутентификации в *PHP* сессии.
 
-При успешной попытке, ``Zend_Auth::authenticate()`` сохраняет идентификатор
-в постоянном хранилище. Если не настроено по другому, ``Zend_Auth``
-использует класс хранилища ``Zend_Auth_Storage_Session``, который в свою
-очередь использует :ref:`Zend_Session <zend.session>`. Вместо него может быть
+При успешной попытке, ``Zend\Authentication\AuthenticationService::authenticate()``
+сохраняет идентификатор в постоянном хранилище. Если не настроено по другому, 
+``Zend\Authentication\AuthenticationService``использует класс хранилища 
+``Zend\Authentication\Storage\Session``, который в свою
+очередь использует :ref:`Zend\Session <zend.session>`. Вместо него может быть
 использован пользовательский класс, для этого нужно передать
-``Zend_Auth::setStorage()`` объект, реализующий ``Zend_Auth_Storage_Interface``.
+``Zend\Authentication\AuthenticationService::setStorage()`` объект,
+реализующий ``Zend\Authentication\Storage\StorageInterface``.
 
 .. note::
 
    Если автоматическое сохранение идентификатора не подходит в
    каком-либо конкретном случае, тогда разработчику следует
-   отказаться от использования класса ``Zend_Auth`` и использовать
+   отказаться от использования класса ``Zend\Authentication\AuthenticationService`` и использовать
    адаптер напрямую.
 
 .. _zend.authentication.introduction.persistence.default.example:
