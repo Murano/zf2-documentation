@@ -88,16 +88,16 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 Результат аутентификации
 ------------------------
 
-Метод ``authenticate()`` адаптера ``Zend_Auth`` возвращает экзмепляр
-``Zend_Auth_Result`` для представления результата попытки
-аутентификации. Объект ``Zend_Auth_Result`` заполняется адаптером при
+Метод ``authenticate()`` адаптера ``Zend\Authentication`` возвращает экзмепляр
+``Zend\Authentication\Result`` для представления результата попытки
+аутентификации. Объект ``Zend\Authentication\Result`` заполняется адаптером при
 создании, и следующие четыре метода представляют его базовый
 набор операций:
 
 - ``isValid()``- возвращает ``TRUE`` только в случае успешной попытки
   аутентификации.
 
-- ``getCode()``- возвращает значение одной из констант ``Zend_Auth_Result`` для
+- ``getCode()``- возвращает значение одной из констант ``Zend\Authentication\Result`` для
   обозначения успешности попытки или типа возникшей ошибки.
   Это может быть использовано в ситуации, когда разработчик
   хочет различать результаты попыток аутентификации. К
@@ -124,13 +124,14 @@ Zend Framework смотрите в :ref:`Zend\Permissions\Acl  <zend.acl>`.
 
 .. code-block:: php
    :linenos:
+   use Zend\Authentication\Result;   
 
-   Zend_Auth_Result::SUCCESS
-   Zend_Auth_Result::FAILURE
-   Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
-   Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS
-   Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID
-   Zend_Auth_Result::FAILURE_UNCATEGORIZED
+   Result::SUCCESS
+   Result::FAILURE
+   Result::FAILURE_IDENTITY_NOT_FOUND
+   Result::FAILURE_IDENTITY_AMBIGUOUS
+   Result::FAILURE_CREDENTIAL_INVALID
+   Result::FAILURE_UNCATEGORIZED
 
 Этот пример показывает, как разработчик может различным
 образом обработать результат аутентификации, используя
